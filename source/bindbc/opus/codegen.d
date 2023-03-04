@@ -9,7 +9,7 @@ module bindbc.opus.codegen;
 import bindbc.opus.config: staticBinding;
 
 /*regex: function decl => makeFnBinds decl
-^[ \t]*([A-Za-z0-9_()*]+) (\w+) ?\(([A-Za-z0-9_()*, .=\[\]]*)\);
+^[ \t]*([A-Za-z0-9_()*\[\]]+) (\w+) ?\(([A-Za-z0-9_()*, .=\[\]]*)\);
 \t\t[q{$1}, q{$2}, q{$3}],
 */
 enum makeFnBinds = (string[3][] fns) nothrow pure @safe{

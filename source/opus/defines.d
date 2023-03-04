@@ -1,5 +1,5 @@
 /+
-+            Copyright 2023 – 2023 Aya Partridge
++                Copyright 2023 Aya Partridge
 + Distributed under the Boost Software License,Version 1.0.
 +     (See accompanying file LICENSE_1_0.txt or copy at
 +           http://www.boost.org/LICENSE_1_0.txt)
@@ -9,7 +9,10 @@ module opus.defines;
 import bindbc.opus.config;
 import bindbc.opus.codegen;
 
-enum{
+import opus.opus: OpusEncoder, OpusDecoder, opus_encoder_ctl, opus_decoder_ctl;
+import opus.multistream: OpusMSEncoder, OpusMSDecoder, opus_multistream_encoder_ctl, opus_multistream_decoder_ctl;
+
+enum: int{
 	OPUS_OK                =  0,
 	OPUS_BAD_ARG           = -1,
 	OPUS_BUFFER_TOO_SMALL  = -2,
@@ -20,7 +23,7 @@ enum{
 	OPUS_ALLOC_FAIL        = -7,
 }
 
-enum{
+enum: int{
 	OPUS_SET_APPLICATION_REQUEST         = 4000,
 	OPUS_GET_APPLICATION_REQUEST         = 4001,
 	OPUS_SET_BITRATE_REQUEST             = 4002,
@@ -59,8 +62,9 @@ enum{
 	OPUS_SET_PREDICTION_DISABLED_REQUEST = 4042,
 	OPUS_GET_PREDICTION_DISABLED_REQUEST = 4043,
 	OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST = 4046,
-	OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST  = 4047,
+	OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST = 4047,
 	OPUS_GET_IN_DTX_REQUEST              = 4049,
+	
 	OPUS_AUTO                            = -1000,
 	OPUS_BITRATE_MAX                     = -1,
 	OPUS_APPLICATION_VOIP                = 2048,
@@ -83,51 +87,106 @@ enum{
 	OPUS_FRAMESIZE_80_MS                 = 5007,
 	OPUS_FRAMESIZE_100_MS                = 5008,
 	OPUS_FRAMESIZE_120_MS                = 5009,
+	
 	OPUS_RESET_STATE                     = 4028,
 }
 
-private alias Seq(A...) = A;
-
-alias OPUS_SET_COMPLEXITY(int x) = Seq!(OPUS_SET_COMPLEXITY_REQUEST, x);
-alias OPUS_GET_COMPLEXITY(int* x) = Seq!(OPUS_GET_COMPLEXITY_REQUEST, x);
-alias OPUS_SET_BITRATE(int x) = Seq!(OPUS_SET_BITRATE_REQUEST, x);
-alias OPUS_GET_BITRATE(int* x) = Seq!(OPUS_GET_BITRATE_REQUEST, x);
-alias OPUS_SET_VBR(int x) = Seq!(OPUS_SET_VBR_REQUEST, x);
-alias OPUS_GET_VBR(int* x) = Seq!(OPUS_GET_VBR_REQUEST, x);
-alias OPUS_SET_VBR_CONSTRAINT(int x) = Seq!(OPUS_SET_VBR_CONSTRAINT_REQUEST, x);
-alias OPUS_GET_VBR_CONSTRAINT(int* x) = Seq!(OPUS_GET_VBR_CONSTRAINT_REQUEST, x);
-alias OPUS_SET_FORCE_CHANNELS(int x) = Seq!(OPUS_SET_FORCE_CHANNELS_REQUEST, x);
-alias OPUS_GET_FORCE_CHANNELS(int* x) = Seq!(OPUS_GET_FORCE_CHANNELS_REQUEST, x);
-alias OPUS_SET_MAX_BANDWIDTH(int x) = Seq!(OPUS_SET_MAX_BANDWIDTH_REQUEST, x);
-alias OPUS_GET_MAX_BANDWIDTH(int* x) = Seq!(OPUS_GET_MAX_BANDWIDTH_REQUEST, x);
-alias OPUS_SET_BANDWIDTH(int x) = Seq!(OPUS_SET_BANDWIDTH_REQUEST, x);
-alias OPUS_SET_SIGNAL(int x) = Seq!(OPUS_SET_SIGNAL_REQUEST, x);
-alias OPUS_GET_SIGNAL(int* x) = Seq!(OPUS_GET_SIGNAL_REQUEST, x);
-alias OPUS_SET_APPLICATION(int x) = Seq!(OPUS_SET_APPLICATION_REQUEST, x);
-alias OPUS_GET_APPLICATION(int* x) = Seq!(OPUS_GET_APPLICATION_REQUEST, x);
-alias OPUS_GET_LOOKAHEAD(int* x) = Seq!(OPUS_GET_LOOKAHEAD_REQUEST, x);
-alias OPUS_SET_INBAND_FEC(int x) = Seq!(OPUS_SET_INBAND_FEC_REQUEST, x);
-alias OPUS_GET_INBAND_FEC(int* x) = Seq!(OPUS_GET_INBAND_FEC_REQUEST, x);
-alias OPUS_SET_PACKET_LOSS_PERC(int x) = Seq!(OPUS_SET_PACKET_LOSS_PERC_REQUEST, x);
-alias OPUS_GET_PACKET_LOSS_PERC(int* x) = Seq!(OPUS_GET_PACKET_LOSS_PERC_REQUEST, x);
-alias OPUS_SET_DTX(int x) = Seq!(OPUS_SET_DTX_REQUEST, x);
-alias OPUS_GET_DTX(int* x) = Seq!(OPUS_GET_DTX_REQUEST, x);
-alias OPUS_SET_LSB_DEPTH(int x) = Seq!(OPUS_SET_LSB_DEPTH_REQUEST, x);
-alias OPUS_GET_LSB_DEPTH(int* x) = Seq!(OPUS_GET_LSB_DEPTH_REQUEST, x);
-alias OPUS_SET_EXPERT_FRAME_DURATION(int x) = Seq!(OPUS_SET_EXPERT_FRAME_DURATION_REQUEST, x);
-alias OPUS_GET_EXPERT_FRAME_DURATION(int* x) = Seq!(OPUS_GET_EXPERT_FRAME_DURATION_REQUEST, x);
-alias OPUS_SET_PREDICTION_DISABLED(int x) = Seq!(OPUS_SET_PREDICTION_DISABLED_REQUEST, x);
-alias OPUS_GET_PREDICTION_DISABLED(int* x) = Seq!(OPUS_GET_PREDICTION_DISABLED_REQUEST, x);
-alias OPUS_GET_FINAL_RANGE(uint* x) = Seq!(OPUS_GET_FINAL_RANGE_REQUEST, x);
-alias OPUS_GET_BANDWIDTH(int* x) = Seq!(OPUS_GET_BANDWIDTH_REQUEST, x);
-alias OPUS_GET_SAMPLE_RATE(int* x) = Seq!(OPUS_GET_SAMPLE_RATE_REQUEST, x);
-alias OPUS_SET_PHASE_INVERSION_DISABLED(int x) = Seq!(OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, x);
-alias OPUS_GET_PHASE_INVERSION_DISABLED(int* x) = Seq!(OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, x);
-alias OPUS_GET_IN_DTX(int* x) = Seq!(OPUS_GET_IN_DTX_REQUEST, x);
-alias OPUS_SET_GAIN(int x) = Seq!(OPUS_SET_GAIN_REQUEST, x);
-alias OPUS_GET_GAIN(int* x) = Seq!(OPUS_GET_GAIN_REQUEST, x);
-alias OPUS_GET_LAST_PACKET_DURATION(int* x) = Seq!(OPUS_GET_LAST_PACKET_DURATION_REQUEST, x);
-alias OPUS_GET_PITCH(int* x) = Seq!(OPUS_GET_PITCH_REQUEST, x);
+pragma(inline,true) nothrow @nogc{
+	auto OPUS_SET_COMPLEXITY(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_COMPLEXITY_REQUEST, x); }
+	auto OPUS_SET_COMPLEXITY(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_COMPLEXITY_REQUEST, x); }
+	auto OPUS_GET_COMPLEXITY(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_COMPLEXITY_REQUEST, x); }
+	auto OPUS_GET_COMPLEXITY(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_COMPLEXITY_REQUEST, x); }
+	auto OPUS_SET_BITRATE(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_BITRATE_REQUEST, x); }
+	auto OPUS_SET_BITRATE(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_BITRATE_REQUEST, x); }
+	auto OPUS_GET_BITRATE(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_BITRATE_REQUEST, x); }
+	auto OPUS_GET_BITRATE(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_BITRATE_REQUEST, x); }
+	auto OPUS_SET_VBR(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_VBR_REQUEST, x); }
+	auto OPUS_SET_VBR(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_VBR_REQUEST, x); }
+	auto OPUS_GET_VBR(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_VBR_REQUEST, x); }
+	auto OPUS_GET_VBR(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_VBR_REQUEST, x); }
+	auto OPUS_SET_VBR_CONSTRAINT(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_VBR_CONSTRAINT_REQUEST, x); }
+	auto OPUS_SET_VBR_CONSTRAINT(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_VBR_CONSTRAINT_REQUEST, x); }
+	auto OPUS_GET_VBR_CONSTRAINT(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_VBR_CONSTRAINT_REQUEST, x); }
+	auto OPUS_GET_VBR_CONSTRAINT(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_VBR_CONSTRAINT_REQUEST, x); }
+	auto OPUS_SET_FORCE_CHANNELS(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_FORCE_CHANNELS_REQUEST, x); }
+	auto OPUS_SET_FORCE_CHANNELS(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_FORCE_CHANNELS_REQUEST, x); }
+	auto OPUS_GET_FORCE_CHANNELS(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_FORCE_CHANNELS_REQUEST, x); }
+	auto OPUS_GET_FORCE_CHANNELS(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_FORCE_CHANNELS_REQUEST, x); }
+	auto OPUS_SET_MAX_BANDWIDTH(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_MAX_BANDWIDTH_REQUEST, x); }
+	auto OPUS_SET_MAX_BANDWIDTH(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_MAX_BANDWIDTH_REQUEST, x); }
+	auto OPUS_GET_MAX_BANDWIDTH(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_MAX_BANDWIDTH_REQUEST, x); }
+	auto OPUS_GET_MAX_BANDWIDTH(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_MAX_BANDWIDTH_REQUEST, x); }
+	auto OPUS_SET_BANDWIDTH(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_BANDWIDTH_REQUEST, x); }
+	auto OPUS_SET_BANDWIDTH(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_BANDWIDTH_REQUEST, x); }
+	auto OPUS_SET_SIGNAL(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_SIGNAL_REQUEST, x); }
+	auto OPUS_SET_SIGNAL(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_SIGNAL_REQUEST, x); }
+	auto OPUS_GET_SIGNAL(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_SIGNAL_REQUEST, x); }
+	auto OPUS_GET_SIGNAL(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_SIGNAL_REQUEST, x); }
+	auto OPUS_SET_APPLICATION(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_APPLICATION_REQUEST, x); }
+	auto OPUS_SET_APPLICATION(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_APPLICATION_REQUEST, x); }
+	auto OPUS_GET_APPLICATION(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_APPLICATION_REQUEST, x); }
+	auto OPUS_GET_APPLICATION(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_APPLICATION_REQUEST, x); }
+	auto OPUS_GET_LOOKAHEAD(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_LOOKAHEAD_REQUEST, x); }
+	auto OPUS_GET_LOOKAHEAD(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_LOOKAHEAD_REQUEST, x); }
+	auto OPUS_SET_INBAND_FEC(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_INBAND_FEC_REQUEST, x); }
+	auto OPUS_SET_INBAND_FEC(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_INBAND_FEC_REQUEST, x); }
+	auto OPUS_GET_INBAND_FEC(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_INBAND_FEC_REQUEST, x); }
+	auto OPUS_GET_INBAND_FEC(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_INBAND_FEC_REQUEST, x); }
+	auto OPUS_SET_PACKET_LOSS_PERC(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_PACKET_LOSS_PERC_REQUEST, x); }
+	auto OPUS_SET_PACKET_LOSS_PERC(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_PACKET_LOSS_PERC_REQUEST, x); }
+	auto OPUS_GET_PACKET_LOSS_PERC(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_PACKET_LOSS_PERC_REQUEST, x); }
+	auto OPUS_GET_PACKET_LOSS_PERC(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_PACKET_LOSS_PERC_REQUEST, x); }
+	auto OPUS_SET_DTX(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_DTX_REQUEST, x); }
+	auto OPUS_SET_DTX(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_DTX_REQUEST, x); }
+	auto OPUS_GET_DTX(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_DTX_REQUEST, x); }
+	auto OPUS_GET_DTX(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_DTX_REQUEST, x); }
+	auto OPUS_SET_LSB_DEPTH(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_LSB_DEPTH_REQUEST, x); }
+	auto OPUS_SET_LSB_DEPTH(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_LSB_DEPTH_REQUEST, x); }
+	auto OPUS_GET_LSB_DEPTH(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_LSB_DEPTH_REQUEST, x); }
+	auto OPUS_GET_LSB_DEPTH(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_LSB_DEPTH_REQUEST, x); }
+	auto OPUS_SET_EXPERT_FRAME_DURATION(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_EXPERT_FRAME_DURATION_REQUEST, x); }
+	auto OPUS_SET_EXPERT_FRAME_DURATION(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_EXPERT_FRAME_DURATION_REQUEST, x); }
+	auto OPUS_GET_EXPERT_FRAME_DURATION(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_EXPERT_FRAME_DURATION_REQUEST, x); }
+	auto OPUS_GET_EXPERT_FRAME_DURATION(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_EXPERT_FRAME_DURATION_REQUEST, x); }
+	auto OPUS_SET_PREDICTION_DISABLED(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_PREDICTION_DISABLED_REQUEST, x); }
+	auto OPUS_SET_PREDICTION_DISABLED(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_PREDICTION_DISABLED_REQUEST, x); }
+	auto OPUS_GET_PREDICTION_DISABLED(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_PREDICTION_DISABLED_REQUEST, x); }
+	auto OPUS_GET_PREDICTION_DISABLED(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_PREDICTION_DISABLED_REQUEST, x); }
+	
+	auto OPUS_GET_FINAL_RANGE(OpusEncoder* st, uint* x){ return opus_encoder_ctl(st, OPUS_GET_FINAL_RANGE_REQUEST, x); }
+	auto OPUS_GET_FINAL_RANGE(OpusMSEncoder* st, uint* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_FINAL_RANGE_REQUEST, x); }
+	auto OPUS_GET_FINAL_RANGE(OpusDecoder* st, uint* x){ return opus_decoder_ctl(st, OPUS_GET_FINAL_RANGE_REQUEST, x); }
+	auto OPUS_GET_FINAL_RANGE(OpusMSDecoder* st, uint* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_FINAL_RANGE_REQUEST, x); }
+	auto OPUS_GET_BANDWIDTH(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_BANDWIDTH_REQUEST, x); }
+	auto OPUS_GET_BANDWIDTH(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_BANDWIDTH_REQUEST, x); }
+	auto OPUS_GET_BANDWIDTH(OpusDecoder* st, int* x){ return opus_decoder_ctl(st, OPUS_GET_BANDWIDTH_REQUEST, x); }
+	auto OPUS_GET_BANDWIDTH(OpusMSDecoder* st, int* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_BANDWIDTH_REQUEST, x); }
+	auto OPUS_GET_SAMPLE_RATE(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_SAMPLE_RATE_REQUEST, x); }
+	auto OPUS_GET_SAMPLE_RATE(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_SAMPLE_RATE_REQUEST, x); }
+	auto OPUS_GET_SAMPLE_RATE(OpusDecoder* st, int* x){ return opus_decoder_ctl(st, OPUS_GET_SAMPLE_RATE_REQUEST, x); }
+	auto OPUS_GET_SAMPLE_RATE(OpusMSDecoder* st, int* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_SAMPLE_RATE_REQUEST, x); }
+	auto OPUS_SET_PHASE_INVERSION_DISABLED(OpusEncoder* st, int x){ return opus_encoder_ctl(st, OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_SET_PHASE_INVERSION_DISABLED(OpusMSEncoder* st, int x){ return opus_multistream_encoder_ctl(st, OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_SET_PHASE_INVERSION_DISABLED(OpusDecoder* st, int x){ return opus_decoder_ctl(st, OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_SET_PHASE_INVERSION_DISABLED(OpusMSDecoder* st, int x){ return opus_multistream_decoder_ctl(st, OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_GET_PHASE_INVERSION_DISABLED(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_GET_PHASE_INVERSION_DISABLED(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_GET_PHASE_INVERSION_DISABLED(OpusDecoder* st, int* x){ return opus_decoder_ctl(st, OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_GET_PHASE_INVERSION_DISABLED(OpusMSDecoder* st, int* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, x); }
+	auto OPUS_GET_IN_DTX(OpusEncoder* st, int* x){ return opus_encoder_ctl(st, OPUS_GET_IN_DTX_REQUEST, x); }
+	auto OPUS_GET_IN_DTX(OpusMSEncoder* st, int* x){ return opus_multistream_encoder_ctl(st, OPUS_GET_IN_DTX_REQUEST, x); }
+	auto OPUS_GET_IN_DTX(OpusDecoder* st, int* x){ return opus_decoder_ctl(st, OPUS_GET_IN_DTX_REQUEST, x); }
+	auto OPUS_GET_IN_DTX(OpusMSDecoder* st, int* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_IN_DTX_REQUEST, x); }
+	
+	auto OPUS_SET_GAIN(OpusDecoder* st, int x){ return opus_decoder_ctl(st, OPUS_SET_GAIN_REQUEST, x); }
+	auto OPUS_SET_GAIN(OpusMSDecoder* st, int x){ return opus_multistream_decoder_ctl(st, OPUS_SET_GAIN_REQUEST, x); }
+	auto OPUS_GET_GAIN(OpusDecoder* st, int* x){ return opus_decoder_ctl(st, OPUS_GET_GAIN_REQUEST, x); }
+	auto OPUS_GET_GAIN(OpusMSDecoder* st, int* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_GAIN_REQUEST, x); }
+	auto OPUS_GET_LAST_PACKET_DURATION(OpusDecoder* st, int* x){ return opus_decoder_ctl(st, OPUS_GET_LAST_PACKET_DURATION_REQUEST, x); }
+	auto OPUS_GET_LAST_PACKET_DURATION(OpusMSDecoder* st, int* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_LAST_PACKET_DURATION_REQUEST, x); }
+	auto OPUS_GET_PITCH(OpusDecoder* st, int* x){ return opus_decoder_ctl(st, OPUS_GET_PITCH_REQUEST, x); }
+	auto OPUS_GET_PITCH(OpusMSDecoder* st, int* x){ return opus_multistream_decoder_ctl(st, OPUS_GET_PITCH_REQUEST, x); }
+}
 
 mixin(joinFnBinds((){
 	string[][] ret;
