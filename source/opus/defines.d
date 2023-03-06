@@ -67,9 +67,11 @@ enum: int{
 	
 	OPUS_AUTO                            = -1000,
 	OPUS_BITRATE_MAX                     = -1,
+	
 	OPUS_APPLICATION_VOIP                = 2048,
 	OPUS_APPLICATION_AUDIO               = 2049,
 	OPUS_APPLICATION_RESTRICTED_LOWDELAY = 2051,
+	
 	OPUS_SIGNAL_VOICE                    = 3001,
 	OPUS_SIGNAL_MUSIC                    = 3002,
 	OPUS_BANDWIDTH_NARROWBAND            = 1101,
@@ -77,6 +79,7 @@ enum: int{
 	OPUS_BANDWIDTH_WIDEBAND              = 1103,
 	OPUS_BANDWIDTH_SUPERWIDEBAND         = 1104,
 	OPUS_BANDWIDTH_FULLBAND              = 1105,
+	
 	OPUS_FRAMESIZE_ARG                   = 5000,
 	OPUS_FRAMESIZE_2_5_MS                = 5001,
 	OPUS_FRAMESIZE_5_MS                  = 5002,
