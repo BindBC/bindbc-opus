@@ -12,20 +12,7 @@ enum staticBinding = (){
 	else return false;
 }();
 
-struct Version{
-	int major;
-	int minor;
-	int patch;
-	
-	int opCmp(Version x) @nogc nothrow pure{
-		if(major != x.major)
-			return major - x.major;
-		else if(minor != x.minor)
-			return minor - x.minor;
-		else
-			return patch - x.patch;
-	}
-}
+import bindbc.common.versions;
 
 enum opusVersion = (){
 	version(none)    return Version(1,3,1); //just a placeholder

@@ -5,6 +5,7 @@
 	"authors": ["Aya Partridge"],
 	"license": "Boost",
 	
+	"dependencies": {"bindbc-common": "~>0.0.1"},
 	"targetType": "staticLibrary",
 	"targetPath": "lib",
 	"targetName": "BindBC_Opus",
@@ -17,7 +18,10 @@
 		{
 			"name": "dynamicBC",
 			"dependencies": {"bindbc-loader": "~>1.0.2"},
-			"subConfigurations": {"bindbc-loader": "yesBC"},
+			"subConfigurations": {
+				"bindbc-loader": "yesBC",
+				"bindbc-common": "yesBC",
+			},
 			"dflags": ["-betterC"],
 		},
 		{
@@ -26,6 +30,9 @@
 		},
 		{
 			"name": "staticBC",
+			"subConfigurations": {
+				"bindbc-common": "yesBC",
+			},
 			"dflags": ["-betterC"],
 			"versions": ["BindOpus_Static"],
 		}
