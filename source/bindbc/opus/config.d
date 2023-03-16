@@ -18,3 +18,7 @@ enum opusVersion = (){
 	version(none)    return Version(1,3,1); //just a placeholder
 	else             return Version(1,3,1);
 }();
+
+import bindbc.common.codegen;
+
+mixin(makeFnBindFns(staticBinding));

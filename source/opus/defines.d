@@ -7,7 +7,6 @@
 module opus.defines;
 
 import bindbc.opus.config;
-import bindbc.opus.codegen;
 
 import opus.opus: OpusEncoder, OpusDecoder, opus_encoder_ctl, opus_decoder_ctl;
 import opus.multistream: OpusMSEncoder, OpusMSDecoder, opus_multistream_encoder_ctl, opus_multistream_decoder_ctl;

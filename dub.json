@@ -5,7 +5,7 @@
 	"authors": ["Aya Partridge"],
 	"license": "Boost",
 	
-	"dependencies": {"bindbc-common": "~>0.0.1"},
+	"dependencies": {"bindbc-common": "~>0.0.3"},
 	"targetType": "staticLibrary",
 	"targetPath": "lib",
 	"targetName": "BindBC_Opus",

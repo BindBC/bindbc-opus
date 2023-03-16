@@ -7,7 +7,6 @@
 module opus.opus;
 
 import bindbc.opus.config;
-import bindbc.opus.codegen;
 
 struct OpusEncoder;
 
