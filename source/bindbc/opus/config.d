@@ -15,8 +15,8 @@ enum staticBinding = (){
 import bindbc.common.versions;
 
 enum opusVersion = (){
-	version(none)    return Version(1,3,1); //just a placeholder
-	else             return Version(1,3,1);
+	version(Opus_1_3_1)   return Version(1,3,1); //just a placeholder
+	else                  return Version(1,3,1);
 }();
 
 import bindbc.common.codegen;
