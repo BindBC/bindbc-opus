@@ -3,7 +3,7 @@
 	"description": "Static & dynamic bindings to Opus, compatible with BetterC, @nogc and nothrow.",
 	"homepage": "",
 	"authors": ["Aya Partridge"],
-	"license": "Boost",
+	"license": "BSL-1.0",
 	
 	"dependencies": {"bindbc-common": "~>0.0.3"},
 	"targetType": "staticLibrary",
