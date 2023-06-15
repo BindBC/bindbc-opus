@@ -1,11 +1,10 @@
 {
 	"name": "bindbc-opus",
 	"description": "Static & dynamic bindings to Opus, compatible with BetterC, @nogc and nothrow.",
-	"homepage": "",
 	"authors": ["Aya Partridge"],
 	"license": "BSL-1.0",
 	
-	"dependencies": {"bindbc-common": "~>0.0.3"},
+	"dependencies": {"bindbc-common": "~>0.0.6"},
 	"targetType": "staticLibrary",
 	"targetPath": "lib",
 	"targetName": "BindBC_Opus",
@@ -22,7 +21,7 @@
 				"bindbc-loader": "yesBC",
 				"bindbc-common": "yesBC",
 			},
-			"dflags": ["-betterC"],
+			"buildOptions": ["betterC"],
 		},
 		{
 			"name": "static",
@@ -30,10 +29,8 @@
 		},
 		{
 			"name": "staticBC",
-			"subConfigurations": {
-				"bindbc-common": "yesBC",
-			},
-			"dflags": ["-betterC"],
+			"subConfigurations": {"bindbc-common": "yesBC",},
+			"buildOptions": ["betterC"],
 			"versions": ["BindOpus_Static"],
 		}
 	],
