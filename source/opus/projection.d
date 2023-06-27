@@ -8,7 +8,7 @@ module opus.projection;
 
 import bindbc.opus.config;
 
-enum: int{
+enum{
 	OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST    = 6001,
 	OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST    = 6003,
 	OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST         = 6005,
@@ -41,4 +41,4 @@ mixin(joinFnBinds((){
 		[q{void}, q{opus_projection_decoder_destroy}, q{OpusProjectionDecoder* st}],
 	]);
 	return ret;
-}()));
+}(), __MODULE__));

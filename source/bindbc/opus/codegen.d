@@ -4,9 +4,9 @@
 +     (See accompanying file LICENSE_1_0.txt or copy at
 +           http://www.boost.org/LICENSE_1_0.txt)
 +/
-module bindbc.opus;
+module bindbc.opus.codegen;
 
-public import bindbc.opus.config;
-public import opus;
-static if(bindOpusfile) public import opusfile;
-static if(bindOpusenc)  public import opusenc;
+import bindbc.opus.config;
+import bindbc.common.codegen;
+
+mixin(makeFnBindFns(staticBinding));

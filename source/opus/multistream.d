@@ -10,7 +10,7 @@ import bindbc.opus.config;
 
 import bindbc.opus;
 
-enum: int{
+enum{
 	OPUS_MULTISTREAM_GET_ENCODER_STATE_REQUEST = 5120,
 	OPUS_MULTISTREAM_GET_DECODER_STATE_REQUEST = 5122,
 }
@@ -43,4 +43,4 @@ mixin(joinFnBinds((){
 		[q{void}, q{opus_multistream_decoder_destroy}, q{OpusMSDecoder* st}],
 	]);
 	return ret;
-}()));
+}(), __MODULE__));

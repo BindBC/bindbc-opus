@@ -1,6 +1,6 @@
 /+
 +                Copyright 2023 Aya Partridge
-+ Distributed under the Boost Software License,Version 1.0.
++ Distributed under the Boost Software License, Version 1.0.
 +     (See accompanying file LICENSE_1_0.txt or copy at
 +           http://www.boost.org/LICENSE_1_0.txt)
 +/
@@ -8,10 +8,9 @@ module opus.defines;
 
 import bindbc.opus.config;
 
-import opus.opus: OpusEncoder, OpusDecoder, opus_encoder_ctl, opus_decoder_ctl;
-import opus.multistream: OpusMSEncoder, OpusMSDecoder, opus_multistream_encoder_ctl, opus_multistream_decoder_ctl;
+import opus;
 
-enum: int{
+enum{
 	OPUS_OK                =  0,
 	OPUS_BAD_ARG           = -1,
 	OPUS_BUFFER_TOO_SMALL  = -2,
@@ -22,7 +21,7 @@ enum: int{
 	OPUS_ALLOC_FAIL        = -7,
 }
 
-enum: int{
+enum{
 	OPUS_SET_APPLICATION_REQUEST         = 4000,
 	OPUS_GET_APPLICATION_REQUEST         = 4001,
 	OPUS_SET_BITRATE_REQUEST             = 4002,
@@ -197,4 +196,4 @@ mixin(joinFnBinds((){
 		[q{const(char)*}, q{opus_get_version_string}, q{}],
 	]);
 	return ret;
-}()));
+}(), __MODULE__));

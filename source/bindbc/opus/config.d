@@ -12,11 +12,21 @@ enum staticBinding = (){
 	else return false;
 }();
 
-import bindbc.common.versions;
+public import bindbc.common.versions;
 
-enum opusVersion = (){
-	version(Opus_1_3_1)   return Version(1,3,1); //just a placeholder
-	else                  return Version(1,3,1);
+//enum opusVersion = (){
+//	version(Opus_1_4_0)     return Version(1,4,0);
+//	else                    return Version(1,3,1);
+//}();
+
+enum bindOpusfile = (){
+	version(Opusfile_0_12) return true;
+	else return false;
+}();
+
+enum bindOpusenc = (){
+	version(Opusenc_0_2) return true;
+	else return false;
 }();
 
 import bindbc.common.codegen;
