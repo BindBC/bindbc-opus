@@ -2,14 +2,14 @@
 # BindBC-Opus
 This project provides a set of both static and dynamic bindings to the [Opus libraries](https://opus-codec.org/) opus, opusfile, and opusenc. They are compatible with `@nogc` and `nothrow`, and can be compiled with BetterC compatibility.
 
-| Table of Contents |
-|-------------------|
-|[License](#license)|
+| Table of Contents                       |
+|-----------------------------------------|
+|[License](#license)                      |
 |[Opus documentation](#opus-documentation)|
-|[Quickstart guide](#quickstart-guide)|
+|[Quickstart guide](#quickstart-guide)    |
 |[Binding-specific changes](#binding-specific-changes)|
-|[Configurations](#configurations)|
-|[Library versions](#library-versions)|
+|[Configurations](#configurations)        |
+|[Library versions](#library-versions)    |
 
 ## License
 
