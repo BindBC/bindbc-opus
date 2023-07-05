@@ -28,7 +28,3 @@ enum bindOpusenc = (){
 	version(Opusenc_0_2) return true;
 	else return false;
 }();
-
-import bindbc.common.codegen;
-
-mixin(makeFnBindFns(staticBinding));
