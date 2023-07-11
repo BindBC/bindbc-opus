@@ -7,6 +7,7 @@
 module opus.defines;
 
 import bindbc.opus.config;
+import bindbc.opus.codegen;
 
 import opus;
 

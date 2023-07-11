@@ -7,6 +7,7 @@
 module opus.multistream;
 
 import bindbc.opus.config;
+import bindbc.opus.codegen;
 
 import bindbc.opus;
 

@@ -7,6 +7,7 @@
 module opus.projection;
 
 import bindbc.opus.config;
+import bindbc.opus.codegen;
 
 enum{
 	OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST    = 6001,
