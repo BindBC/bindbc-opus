@@ -188,8 +188,7 @@ BindBC-Opus has the following configurations:
 
 For projects that don't use dub, if BindBC-Opus is compiled for static bindings then the version identifier `BindOpus_Static` must be passed to your compiler when building your project.
 
-> __Note__
->
+> [!NOTE]\
 > The version identifier `BindBC_Static` can be used to configure all of the _official_ BindBC packages used in your program. (i.e. those maintained in [the BindBC GitHub organisation](https://github.com/BindBC)) Some third-party BindBC packages may support it as well.
 
 To enable bindings of `opus_custom.h`, pass version identifier `Opus_Custom` to your compiler.
