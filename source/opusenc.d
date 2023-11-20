@@ -81,35 +81,34 @@ pragma(inline,true) nothrow @nogc{
 }
 
 mixin(joinFnBinds((){
-	string[][] ret;
-	ret ~= makeFnBinds([
-		[q{OggOpusComments*}, q{ope_comments_create}, q{}],
-		[q{OggOpusComments*}, q{ope_comments_copy}, q{OggOpusComments* comments}],
-		[q{void}, q{ope_comments_destroy}, q{OggOpusComments* comments}],
-		[q{int}, q{ope_comments_add}, q{OggOpusComments* comments, const(char)* tag, const(char)* val}],
-		[q{int}, q{ope_comments_add_string}, q{OggOpusComments* comments, const(char)* tag_and_val}],
-		[q{int}, q{ope_comments_add_picture}, q{OggOpusComments* comments, const(char)* filename, int picture_type, const(char)* description}],
-		[q{int}, q{ope_comments_add_picture_from_memory}, q{OggOpusComments* comments, const(ubyte)* ptr, size_t size, int picture_type, const(char)* description}],
-		[q{OggOpusEnc*}, q{ope_encoder_create_file}, q{const(char)* path, OggOpusComments* comments, int rate, int channels, int family, int* error}],
-		[q{OggOpusEnc*}, q{ope_encoder_create_callbacks}, q{const(OpusEncCallbacks)* callbacks, void* user_data, OggOpusComments* comments, int rate, int channels, int family, int* error}],
-		[q{OggOpusEnc*}, q{ope_encoder_create_pull}, q{OggOpusComments* comments, int rate, int channels, int family, int* error}],
-		[q{int}, q{ope_encoder_deferred_init_with_mapping}, q{OggOpusEnc* enc, int family, int streams, int coupled_streams, const(ubyte)* mapping}],
-		[q{int}, q{ope_encoder_write_float}, q{OggOpusEnc* enc, const(float)* pcm, int samples_per_channel}],
-		[q{int}, q{ope_encoder_write}, q{OggOpusEnc* enc, const(short)* pcm, int samples_per_channel}],
-		[q{int}, q{ope_encoder_get_page}, q{OggOpusEnc* enc, ubyte* *page, int* len, int flush}],
-		[q{int}, q{ope_encoder_drain}, q{OggOpusEnc* enc}],
-		[q{void}, q{ope_encoder_destroy}, q{OggOpusEnc* enc}],
-		[q{int}, q{ope_encoder_chain_current}, q{OggOpusEnc* enc, OggOpusComments* comments}],
-		[q{int}, q{ope_encoder_continue_new_file}, q{OggOpusEnc* enc, const(char)* path, OggOpusComments* comments}],
-		[q{int}, q{ope_encoder_continue_new_callbacks}, q{OggOpusEnc* enc, void* user_data, OggOpusComments* comments}],
-		[q{int}, q{ope_encoder_flush_header}, q{OggOpusEnc* enc}],
-		[q{int}, q{ope_encoder_ctl}, q{OggOpusEnc* enc, int request, ...}],
-		[q{const(char)*}, q{ope_strerror}, q{int error}],
-		[q{const(char)*}, q{ope_get_version_string}, q{}],
-		[q{int}, q{ope_get_abi_version}, q{}],
-	]);
+	FnBind[] ret = [
+		{q{OggOpusComments*}, q{ope_comments_create}, q{}},
+		{q{OggOpusComments*}, q{ope_comments_copy}, q{OggOpusComments* comments}},
+		{q{void}, q{ope_comments_destroy}, q{OggOpusComments* comments}},
+		{q{int}, q{ope_comments_add}, q{OggOpusComments* comments, const(char)* tag, const(char)* val}},
+		{q{int}, q{ope_comments_add_string}, q{OggOpusComments* comments, const(char)* tag_and_val}},
+		{q{int}, q{ope_comments_add_picture}, q{OggOpusComments* comments, const(char)* filename, int picture_type, const(char)* description}},
+		{q{int}, q{ope_comments_add_picture_from_memory}, q{OggOpusComments* comments, const(ubyte)* ptr, size_t size, int picture_type, const(char)* description}},
+		{q{OggOpusEnc*}, q{ope_encoder_create_file}, q{const(char)* path, OggOpusComments* comments, int rate, int channels, int family, int* error}},
+		{q{OggOpusEnc*}, q{ope_encoder_create_callbacks}, q{const(OpusEncCallbacks)* callbacks, void* user_data, OggOpusComments* comments, int rate, int channels, int family, int* error}},
+		{q{OggOpusEnc*}, q{ope_encoder_create_pull}, q{OggOpusComments* comments, int rate, int channels, int family, int* error}},
+		{q{int}, q{ope_encoder_deferred_init_with_mapping}, q{OggOpusEnc* enc, int family, int streams, int coupled_streams, const(ubyte)* mapping}},
+		{q{int}, q{ope_encoder_write_float}, q{OggOpusEnc* enc, const(float)* pcm, int samples_per_channel}},
+		{q{int}, q{ope_encoder_write}, q{OggOpusEnc* enc, const(short)* pcm, int samples_per_channel}},
+		{q{int}, q{ope_encoder_get_page}, q{OggOpusEnc* enc, ubyte* *page, int* len, int flush}},
+		{q{int}, q{ope_encoder_drain}, q{OggOpusEnc* enc}},
+		{q{void}, q{ope_encoder_destroy}, q{OggOpusEnc* enc}},
+		{q{int}, q{ope_encoder_chain_current}, q{OggOpusEnc* enc, OggOpusComments* comments}},
+		{q{int}, q{ope_encoder_continue_new_file}, q{OggOpusEnc* enc, const(char)* path, OggOpusComments* comments}},
+		{q{int}, q{ope_encoder_continue_new_callbacks}, q{OggOpusEnc* enc, void* user_data, OggOpusComments* comments}},
+		{q{int}, q{ope_encoder_flush_header}, q{OggOpusEnc* enc}},
+		{q{int}, q{ope_encoder_ctl}, q{OggOpusEnc* enc, int request, ...}},
+		{q{const(char)*}, q{ope_strerror}, q{int error}},
+		{q{const(char)*}, q{ope_get_version_string}, q{}},
+		{q{int}, q{ope_get_abi_version}, q{}},
+	];
 	return ret;
-}(), __MODULE__));
+}()));
 
 static if(!staticBinding):
 import bindbc.loader;

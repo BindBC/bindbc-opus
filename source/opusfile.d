@@ -88,30 +88,29 @@ struct OpusPictureTag{
 }
 
 mixin(joinFnBinds((){
-	string[][] ret;
-	ret ~= makeFnBinds([
-		[q{int}, q{opus_head_parse}, q{OpusHead* _head, const(ubyte)* _data, size_t _len}],
-		[q{long}, q{opus_granule_sample}, q{const(OpusHead)* _head, long _gp}],
-		[q{int}, q{opus_tags_parse}, q{OpusTags* _tags, const(ubyte)* _data, size_t _len}],
-		[q{int}, q{opus_tags_copy}, q{OpusTags* _dst, const(OpusTags)* _src}],
-		[q{void}, q{opus_tags_init}, q{OpusTags* _tags}],
-		[q{int}, q{opus_tags_add}, q{OpusTags* _tags, const(char)* _tag, const(char)* _value}],
-		[q{int}, q{opus_tags_add_comment}, q{OpusTags* _tags, const(char)* _comment}],
-		[q{int}, q{opus_tags_set_binary_suffix}, q{OpusTags* _tags, const(ubyte)* _data, int _len}],
-		[q{const(char)*}, q{opus_tags_query}, q{const(OpusTags)* _tags, const(char)* _tag, int _count}],
-		[q{int}, q{opus_tags_query_count}, q{const(OpusTags)* _tags, const(char)* _tag}],
-		[q{const(ubyte)*}, q{opus_tags_get_binary_suffix}, q{const(OpusTags)* _tags, int* _len}],
-		[q{int}, q{opus_tags_get_album_gain}, q{const(OpusTags)* _tags, int* _gain_q8}],
-		[q{int}, q{opus_tags_get_track_gain}, q{const(OpusTags)* _tags, int* _gain_q8}],
-		[q{void}, q{opus_tags_clear}, q{OpusTags* _tags}],
-		[q{int}, q{opus_tagcompare}, q{const(char)* _tag_name, const(char)* _comment}],
-		[q{int}, q{opus_tagncompare}, q{const(char)* _tag_name, int _tag_len, const(char)* _comment}],
-		[q{int}, q{opus_picture_tag_parse}, q{OpusPictureTag* _pic, const(char)* _tag}],
-		[q{void}, q{opus_picture_tag_init}, q{OpusPictureTag* _pic}],
-		[q{void}, q{opus_picture_tag_clear}, q{OpusPictureTag* _pic}],
-	]);
+	FnBind[] ret = [
+		{q{int}, q{opus_head_parse}, q{OpusHead* _head, const(ubyte)* _data, size_t _len}},
+		{q{long}, q{opus_granule_sample}, q{const(OpusHead)* _head, long _gp}},
+		{q{int}, q{opus_tags_parse}, q{OpusTags* _tags, const(ubyte)* _data, size_t _len}},
+		{q{int}, q{opus_tags_copy}, q{OpusTags* _dst, const(OpusTags)* _src}},
+		{q{void}, q{opus_tags_init}, q{OpusTags* _tags}},
+		{q{int}, q{opus_tags_add}, q{OpusTags* _tags, const(char)* _tag, const(char)* _value}},
+		{q{int}, q{opus_tags_add_comment}, q{OpusTags* _tags, const(char)* _comment}},
+		{q{int}, q{opus_tags_set_binary_suffix}, q{OpusTags* _tags, const(ubyte)* _data, int _len}},
+		{q{const(char)*}, q{opus_tags_query}, q{const(OpusTags)* _tags, const(char)* _tag, int _count}},
+		{q{int}, q{opus_tags_query_count}, q{const(OpusTags)* _tags, const(char)* _tag}},
+		{q{const(ubyte)*}, q{opus_tags_get_binary_suffix}, q{const(OpusTags)* _tags, int* _len}},
+		{q{int}, q{opus_tags_get_album_gain}, q{const(OpusTags)* _tags, int* _gain_q8}},
+		{q{int}, q{opus_tags_get_track_gain}, q{const(OpusTags)* _tags, int* _gain_q8}},
+		{q{void}, q{opus_tags_clear}, q{OpusTags* _tags}},
+		{q{int}, q{opus_tagcompare}, q{const(char)* _tag_name, const(char)* _comment}},
+		{q{int}, q{opus_tagncompare}, q{const(char)* _tag_name, int _tag_len, const(char)* _comment}},
+		{q{int}, q{opus_picture_tag_parse}, q{OpusPictureTag* _pic, const(char)* _tag}},
+		{q{void}, q{opus_picture_tag_init}, q{OpusPictureTag* _pic}},
+		{q{void}, q{opus_picture_tag_clear}, q{OpusPictureTag* _pic}},
+	];
 	return ret;
-}(), __MODULE__));
+}()));
 
 static if(!staticBinding):
 import bindbc.loader;

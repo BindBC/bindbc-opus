@@ -191,10 +191,9 @@ pragma(inline,true) nothrow @nogc{
 }
 
 mixin(joinFnBinds((){
-	string[][] ret;
-	ret ~= makeFnBinds([
-		[q{const(char)*}, q{opus_strerror}, q{int error}],
-		[q{const(char)*}, q{opus_get_version_string}, q{}],
-	]);
+	FnBind[] ret = [
+		{q{const(char)*}, q{opus_strerror}, q{int error}},
+		{q{const(char)*}, q{opus_get_version_string}, q{}},
+	];
 	return ret;
-}(), __MODULE__));
+}()));
