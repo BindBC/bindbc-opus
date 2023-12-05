@@ -12,11 +12,11 @@
 	"configurations": [
 		{
 			"name": "dynamic",
-			"dependencies": {"bindbc-loader": "~>1.1.1"},
+			"dependencies": {"bindbc-loader": "~>1.1.0"},
 		},
 		{
 			"name": "dynamicBC",
-			"dependencies": {"bindbc-loader": "~>1.1.1"},
+			"dependencies": {"bindbc-loader": "~>1.1.0"},
 			"subConfigurations": {
 				"bindbc-loader": "yesBC",
 				"bindbc-common": "yesBC",
