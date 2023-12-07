@@ -15,7 +15,7 @@ This project provides a set of both static and dynamic bindings to the [Opus lib
 
 BindBC-Opus&mdash;as well as every other binding in the [BindBC project](https://github.com/BindBC)&mdash;is licensed under the [Boost Software License](https://www.boost.org/LICENSE_1_0.txt).
 
-Bear in mind that you still need to abide by [Opus' license](https://opus-codec.org/license/).
+Bear in mind that you still need to abide by [Opus' license](https://opus-codec.org/license/) if you use it through these bindings.
 
 ## Opus documentation
 This readme describes how to use BindBC-Opus, *not* the Opus libraries themselves. BindBC-Opus does have minor API changes from the Opus libraries, which are listed in [Binding-specific changes](#binding-specific-changes). Otherwise BindBC-Opus is a direct D binding to the Opus libraries' APIs, so any existing Opus documentation and tutorials can be adapted with only minor modifications.
