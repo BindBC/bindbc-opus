@@ -50,7 +50,7 @@ subConfiguration "bindbc-opus" "staticBC"
 
 If you need to use opusfile, or opusenc, then you will have to add the appropriate version identifiers to `versions` in your dub configuration. For a list of library version identifiers, see [Library versions](#library-versions).
 
-If using static bindings, then you will also need to add the name of each library you're using to `libs`.
+If you're using static bindings, then you will also need to add the name of each library you're using to `libs`.
 
 Example __dub.json__
 ```json
@@ -167,13 +167,13 @@ bool loadLib(){
 ## Binding-specific changes
 
 ### CTLs
-D does not have macros, so any CTL macros like this:
+Opus has CTL macros:
 ```c
 #define OPUS_SET_BITRATE(x) OPUS_SET_BITRATE_REQUEST, __opus_check_int(x)
-//used like:
+//usage:
 opus_encoder_ctl(myEncoder, OPUS_SET_BITRATE(64000));
 ```
-Have been changed to simple function wrappers that are used instead of the `*_ctl` functions themselves, like this:
+Since D does not have C-style macros, these have been changed to simple wrapper functions that are used instead of the `*_ctl` functions themselves:
 ```d
 OPUS_SET_BITRATE(myEncoder, 64000);
 ```
@@ -212,8 +212,7 @@ When linking with the static libraries, there is no runtime dependency on the Op
 ## Library Versions
 These are the supported versions of opusfile and opusenc, along with the corresponding version identifiers to add to your dub configuration or pass to the compiler. As of opus version 1.4.0, any opus version should work with these bindings.
 
-> __Note__
->
+> [!NOTE]\
 > It is necessary to specify only a single version identifier per library. For example, `Opusfile_0_12` by itself will activate the opusfile binding.
 
 <details>
