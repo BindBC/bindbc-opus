@@ -181,7 +181,7 @@ OPUS_SET_BITRATE(myEncoder, 64000);
 ## Configurations
 BindBC-Opus has the following configurations:
 
-|     ┌      |  DRuntime  |   BetterC   |
+|      ┌      |  DRuntime  |   BetterC   |
 |-------------|------------|-------------|
 | **Dynamic** | `dynamic`  | `dynamicBC` |
 | **Static**  | `static`   | `staticBC`  |
@@ -210,7 +210,7 @@ Static linking requires the Opus libraries' development packages be installed on
 When linking with the static libraries, there is no runtime dependency on the Opus libraries.
 
 ## Library Versions
-These are the supported versions of opusfile and opusenc, along with the corresponding version identifiers to add to your dub configuration or pass to the compiler. As of opus version 1.4.0, any opus version should work with these bindings.
+These are the supported versions of opusfile and opusenc, along with the corresponding version identifiers to add to your dub configuration or pass to the compiler. As of opus version 1.4, any opus version should work with these bindings.
 
 > [!NOTE]\
 > It is necessary to specify only a single version identifier per library. For example, `Opusfile_0_12` by itself will activate the opusfile binding.
