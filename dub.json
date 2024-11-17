@@ -4,7 +4,7 @@
 	"authors": ["Aya Partridge"],
 	"license": "BSL-1.0",
 	
-	"dependencies": {"bindbc-common": "~>0.1.1"},
+	"dependencies": {"bindbc-common": "~>1.0"},
 	"targetType": "staticLibrary",
 	"targetPath": "lib",
 	"targetName": "BindBC_Opus",
@@ -12,11 +12,11 @@
 	"configurations": [
 		{
 			"name": "dynamic",
-			"dependencies": {"bindbc-loader": "~>1.1.0"},
+			"dependencies": {"bindbc-loader": "~>1.1"},
 		},
 		{
 			"name": "dynamicBC",
-			"dependencies": {"bindbc-loader": "~>1.1.0"},
+			"dependencies": {"bindbc-loader": "~>1.1"},
 			"subConfigurations": {
 				"bindbc-loader": "yesBC",
 				"bindbc-common": "yesBC",

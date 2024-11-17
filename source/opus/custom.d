@@ -69,21 +69,21 @@ pragma(inline,true) nothrow @nogc{
 
 mixin(joinFnBinds((){
 	FnBind[] ret = [
-		{q{OpusCustomMode*}, q{opus_custom_mode_create}, q{int Fs, int frame_size, int* error}},
+		{q{OpusCustomMode*}, q{opus_custom_mode_create}, q{int fs, int frameSize, int* error}},
 		{q{void}, q{opus_custom_mode_destroy}, q{OpusCustomMode* mode}},
 		{q{int}, q{opus_custom_encoder_get_size}, q{const(OpusCustomMode)* mode, int channels}},
 		{q{int}, q{opus_custom_encoder_init}, q{OpusCustomEncoder* st, const(OpusCustomMode)* mode, int channels}},
 		{q{OpusCustomEncoder*}, q{opus_custom_encoder_create}, q{const(OpusCustomMode)* mode, int channels, int* error}},
 		{q{void}, q{opus_custom_encoder_destroy}, q{OpusCustomEncoder* st}},
-		{q{int}, q{opus_custom_encode_float}, q{OpusCustomEncoder* st, const(float)* pcm, int frame_size, ubyte* compressed, int maxCompressedBytes}},
-		{q{int}, q{opus_custom_encode}, q{OpusCustomEncoder* st, const(short)* pcm, int frame_size, ubyte* compressed, int maxCompressedBytes}},
+		{q{int}, q{opus_custom_encode_float}, q{OpusCustomEncoder* st, const(float)* pcm, int frameSize, ubyte* compressed, int maxCompressedBytes}},
+		{q{int}, q{opus_custom_encode}, q{OpusCustomEncoder* st, const(short)* pcm, int frameSize, ubyte* compressed, int maxCompressedBytes}},
 		{q{int}, q{opus_custom_encoder_ctl}, q{OpusCustomEncoder* st, int request, ...}},
 		{q{int}, q{opus_custom_decoder_get_size}, q{const(OpusCustomMode)* mode, int channels}},
 		{q{int}, q{opus_custom_decoder_init}, q{OpusCustomDecoder* st, const(OpusCustomMode)* mode, int channels}},
 		{q{OpusCustomDecoder*}, q{opus_custom_decoder_create}, q{const(OpusCustomMode)* mode, int channels, int* error}},
 		{q{void}, q{opus_custom_decoder_destroy}, q{OpusCustomDecoder* st}},
-		{q{int}, q{opus_custom_decode_float}, q{OpusCustomDecoder* st, const(ubyte)* data, int len, float* pcm, int frame_size}},
-		{q{int}, q{opus_custom_decode}, q{OpusCustomDecoder* st, const(ubyte)* data, int len, short* pcm, int frame_size}},
+		{q{int}, q{opus_custom_decode_float}, q{OpusCustomDecoder* st, const(ubyte)* data, int len, float* pcm, int frameSize}},
+		{q{int}, q{opus_custom_decode}, q{OpusCustomDecoder* st, const(ubyte)* data, int len, short* pcm, int frameSize}},
 		{q{int}, q{opus_custom_decoder_ctl}, q{OpusCustomDecoder* st, int request, ...}},
 	];
 	return ret;

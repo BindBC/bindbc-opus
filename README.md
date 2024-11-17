@@ -27,12 +27,12 @@ To use BindBC-Opus in your dub project, add it to the list of `dependencies` in 
 Example __dub.json__
 ```json
 "dependencies": {
-	"bindbc-opus": "~>1.0.0",
+	"bindbc-opus": "~>1.1",
 },
 ```
 Example __dub.sdl__
 ```sdl
-dependency "bindbc-opus" version="~>1.0.0"
+dependency "bindbc-opus" version="~>1.1"
 ```
 
 By default, BindBC-Opus is configured to compile as a dynamic binding that is not BetterC-compatible. If you prefer static bindings or need BetterC compatibility, they can be enabled via `subConfigurations` in your dub configuration file. For configuration naming & more details, see [Configurations](#configurations).

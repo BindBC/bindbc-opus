@@ -9,4 +9,4 @@ module bindbc.opus.codegen;
 import bindbc.opus.config;
 import bindbc.common.codegen;
 
-mixin(makeFnBindFns(staticBinding, Version(0,1,1)));
+mixin(makeFnBindFns(staticBinding, Version(1,0,0)));
